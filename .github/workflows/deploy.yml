@@ -20,6 +20,6 @@ jobs:
         run: |
           pkill -f 'java -jar' || true
 
-- name: Subir nova versão da aplicação
-  run: |
-    nohup java -jar target/*.jar > springboot-app.log 2>&1 &
+      - name: Subir nova versão da aplicação
+        run: |
+          nohup java -jar target/*.jar > springboot-app.log 2>&1 &
