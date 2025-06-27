@@ -21,6 +21,4 @@ jobs:
           pkill -f 'java -jar' || true
 
       - name: Subir nova versão da aplicação
-        working-directory: /home/softexpertapi/actions-runner/_work/springboot-app/springboot-app
-        run: |
-          nohup java -jar target/integration-0.0.1-SNAPSHOT.jar > /tmp/middleware.log 2>&1 &
+        run: ./start.sh
