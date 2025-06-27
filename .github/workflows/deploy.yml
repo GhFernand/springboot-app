@@ -1,0 +1,25 @@
+name: Deploy Spring Boot App
+
+on:
+  push:
+    branches:
+      - main
+
+jobs:
+  build-and-deploy:
+    runs-on: self-hosted
+
+    steps:
+      - name: Checkout código
+        uses: actions/checkout@v3
+
+      - name: Compilar aplicação
+        run: ./mvnw clean package -DskipTests
+
+      - name: Parar instância anterior
+        run: |
+          taskkill /F /FI "WINDOWTITLE eq java -jar" || echo "Sem processo rodando"
+
+      - name: Iniciar nova versão
+        run: |
+          start /B java -jar target\*.jar > app.log 2>&1

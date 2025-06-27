@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<configuration>
+
+    <!-- Appender para console -->
+    <appender name="CONSOLE" class="ch.qos.logback.core.ConsoleAppender">
+        <encoder>
+            <pattern>%d{HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+        </encoder>
+    </appender>
+
+    <!-- Appender geral: INFO -->
+    <appender name="APP_GERAL" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/app-geral.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/app-geral.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level %logger{36} - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Appender para mostrar-dados -->
+    <appender name="MOSTRAR_DADOS" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/mostrar-dados.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/mostrar-dados.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Appender para solic-holerite -->
+    <appender name="SOLIC_HOLERITE" class="ch.qos.logback.core.rolling.RollingFileAppender">
+        <file>logs/solic-holerite.log</file>
+        <rollingPolicy class="ch.qos.logback.core.rolling.TimeBasedRollingPolicy">
+            <fileNamePattern>logs/solic-holerite.%d{yyyy-MM-dd}.log.gz</fileNamePattern>
+            <maxHistory>30</maxHistory>
+        </rollingPolicy>
+        <encoder>
+            <pattern>%d{yyyy-MM-dd HH:mm:ss} [%thread] %-5level - %msg%n</pattern>
+            <charset>UTF-8</charset>
+        </encoder>
+    </appender>
+
+    <!-- Logger DEBUG para mostrar-dados -->
+    <logger name="com.semiddleware.integration.log.mostrardados" level="DEBUG" additivity="false">
+        <appender-ref ref="MOSTRAR_DADOS"/>
+    </logger>
+
+    <!-- Logger DEBUG para solic-holerite -->
+    <logger name="com.semiddleware.integration.log.solicholerite" level="DEBUG" additivity="false">
+        <appender-ref ref="SOLIC_HOLERITE"/>
+    </logger>
+
+    <!-- Logger ROOT (console + geral) com nível INFO -->
+    <root level="INFO">
+        <appender-ref ref="CONSOLE"/>
+        <appender-ref ref="APP_GERAL"/>
+    </root>
+
+</configuration>

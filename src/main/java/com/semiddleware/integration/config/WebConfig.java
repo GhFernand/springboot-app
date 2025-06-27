@@ -1,0 +1,27 @@
+
+package com.semiddleware.integration.config;
+
+import com.semiddleware.integration.security.ApiKeyInterceptor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.context.annotation.Configuration;
+import org.springframework.web.servlet.config.annotation.InterceptorRegistry;
+import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+@Configuration
+public class WebConfig implements WebMvcConfigurer {
+
+	@Autowired
+	private ApiKeyInterceptor apiKeyInterceptor;
+
+	@Override
+	public void addInterceptors(InterceptorRegistry registry) {
+	    registry.addInterceptor(apiKeyInterceptor); // ✅ Usa o bean injetado com @Value funcionando
+	}
+
+    @Override
+    public void addResourceHandlers(ResourceHandlerRegistry registry) {
+        registry.addResourceHandler("/files/**")
+                .addResourceLocations("file:uploads/"); // apontando para a pasta 'uploads'
+    }
+}
