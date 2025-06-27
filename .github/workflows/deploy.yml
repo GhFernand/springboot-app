@@ -7,7 +7,7 @@ on:
 
 jobs:
   build-and-deploy:
-    runs-on: self-hosted
+    runs-on: ubuntu-latest
 
     steps:
       - name: Checkout do código
@@ -21,4 +21,6 @@ jobs:
           pkill -f 'java -jar' || true
 
       - name: Subir nova versão da aplicação
-        run: ./start.sh
+        run: |
+          chmod +x start.sh
+          ./start.sh
