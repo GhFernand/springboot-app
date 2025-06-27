@@ -10,16 +10,16 @@ jobs:
     runs-on: self-hosted
 
     steps:
-      - name: Checkout código
+      - name: Checkout do código
         uses: actions/checkout@v3
 
-      - name: Compilar aplicação
-        run: ./mvnw clean package -DskipTests
+      - name: Compilar a aplicação com Maven
+        run: mvn clean package -DskipTests
 
-      - name: Parar instância anterior
+      - name: Encerrar instância anterior (se existir)
         run: |
-          taskkill /F /FI "WINDOWTITLE eq java -jar" || echo "Sem processo rodando"
+          pkill -f 'java -jar' || true
 
-      - name: Iniciar nova versão
+      - name: Subir nova versão da aplicação
         run: |
-          start /B java -jar target\*.jar > app.log 2>&1
+          nohup java -jar target/*.jar &
