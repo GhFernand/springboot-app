@@ -68,7 +68,7 @@ public class DapController {
     
     @GetMapping("/teste")
     public Map<String, String> teste() {
-        return Map.of("mensagem", "Requisição Recebida - Teste Devops01 - OK");
+        return Map.of("mensagem", "Requisição Recebida - Teste Devops02 - OK");
     }
 
      
